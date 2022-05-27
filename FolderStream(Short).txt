@@ -1,0 +1,6 @@
+val lines = sc.textFile("D:/Text.txt")
+println("Lines recieved "+lines.count())
+val words = lines.flatMap(_.split(" "))
+val pairs = words.map(word => (word,1))
+val wordsCount = pairs.reduceByKey(_+_)
+println("Word Count: "+wordsCount.count());
