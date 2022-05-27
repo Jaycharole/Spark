@@ -1,0 +1,19 @@
+Dataset
+
+case class Geo(CITY:String, STATE:String, POPULATION:Int, LITERACYRATE:Double)
+
+val geo_df = spark.read.option("header","true").option("inferSchema","true").option("charset","UTF8").option("delimiter",",").csv("D:/Demographic_Details.csv").as[Geo]
+
+val state = geo_df.filter(Geoobj => Geoobj.STATE=="Gujarat")
+state.show
+
+geo_df.show()
+
+#checking states of Rajasthan
+val state = geo_df.where(geo_df("State")==="Rajasthan")
+state.show()
+
+# checking the population
+val pop = geo_df.where(geo_df("Population")>460000)
+pop.show()
+
